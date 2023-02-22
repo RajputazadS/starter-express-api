@@ -7,7 +7,7 @@ const port=3000
 // const io = socketio(server);
 
 const io = require('socket.io')(server, {
-  cors: {origin : ['*',"http://localhost:4200"]}
+  cors: {origin : '*'}
 });
 
 io.on('connection', client => {
@@ -16,7 +16,20 @@ io.on('connection', client => {
 }
   );
   client.on('disconnect', () => {console.log('disconnect');});
+  
+  client.on('typing', (data) => {
+    io.emit('typing',`${data} is typing`);
+
+  });
+
+
+  client.on('typing stop', () => {
+    io.emit('typing stop');
+  });
+
 });
+
+
 server.listen(port,()=>{
     console.log("port:-"+port);
 });
