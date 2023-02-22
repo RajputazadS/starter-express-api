@@ -7,7 +7,7 @@ const port=3000
 // const io = socketio(server);
 
 const io = require('socket.io')(server, {
-  cors: {origin : '*',"http://localhost:4200"}
+  cors: {origin : ['*',"http://localhost:4200"]}
 });
 
 io.on('connection', client => {
